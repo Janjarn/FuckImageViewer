@@ -1,14 +1,111 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="imageviewer.gui.controller.ImageViewController"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="735.0" prefWidth="1216.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <HBox prefHeight="60.0" prefWidth="1216.0" BorderPane.alignment="CENTER">
+         <children>
+            <MenuButton mnemonicParsing="false" prefHeight="63.0" prefWidth="107.0" text="☰">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Action 1" />
+                <MenuItem mnemonicParsing="false" text="Action 2" />
+              </items>
+               <font>
+                  <Font size="29.0" />
+               </font>
+               <HBox.margin>
+                  <Insets bottom="5.0" left="5.0" top="5.0" />
+               </HBox.margin>
+            </MenuButton>
+            <MFXTextField prefHeight="115.0" prefWidth="482.0">
+               <HBox.margin>
+                  <Insets bottom="5.0" left="5.0" top="5.0" />
+               </HBox.margin>
+            </MFXTextField>
+            <MenuButton mnemonicParsing="false" prefHeight="104.0" prefWidth="331.0" text="MenuButton">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Action 1" />
+                <MenuItem mnemonicParsing="false" text="Action 2" />
+              </items>
+               <HBox.margin>
+                  <Insets bottom="5.0" left="10.0" top="5.0" />
+               </HBox.margin>
+            </MenuButton>
+            <ButtonBar prefHeight="40.0" prefWidth="200.0">
+               <buttons>
+                  <MFXButton depthLevel="LEVEL1" prefHeight="42.0" prefWidth="104.0" text="-">
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </MFXButton>
+                  <MFXButton depthLevel="LEVEL1" prefHeight="42.0" prefWidth="104.0" text="◻">
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </MFXButton>
+                  <MFXButton depthLevel="LEVEL1" prefHeight="42.0" prefWidth="104.0" text="X">
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </MFXButton>
+               </buttons>
+            </ButtonBar>
+         </children>
+      </HBox>
+   </top>
+   <left>
+      <VBox prefHeight="635.0" prefWidth="194.0" BorderPane.alignment="CENTER">
+         <children>
+            <ListView prefHeight="637.0" prefWidth="194.0">
+               <padding>
+                  <Insets bottom="5.0" />
+               </padding>
+            </ListView>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <MFXButton prefHeight="49.0" prefWidth="145.0">
+                     <HBox.margin>
+                        <Insets right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </MFXButton>
+                  <MFXButton prefHeight="49.0" prefWidth="145.0">
+                     <padding>
+                        <Insets top="5.0" />
+                     </padding>
+                     <HBox.margin>
+                        <Insets top="5.0" />
+                     </HBox.margin>
+                  </MFXButton>
+               </children>
+            </HBox>
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </BorderPane.margin>
+      </VBox>
+   </left>
+   <center>
+      <ImageView fitHeight="649.0" fitWidth="1003.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
+   </center>
+</BorderPane>
