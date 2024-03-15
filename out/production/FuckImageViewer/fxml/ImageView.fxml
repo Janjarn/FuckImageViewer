@@ -13,11 +13,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="735.0" prefWidth="1216.0" stylesheets="@../css/MainCss.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="735.0" prefWidth="1216.0" stylesheets="@../css/MainCss.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <HBox prefHeight="60.0" prefWidth="1216.0" BorderPane.alignment="CENTER">
          <children>
-            <MenuButton mnemonicParsing="false" prefHeight="63.0" prefWidth="107.0" text="☰">
+            <MenuButton fx:id="burgerMenuBtn" mnemonicParsing="false" prefHeight="63.0" prefWidth="107.0" text="☰">
               <items>
                 <MenuItem mnemonicParsing="false" text="Action 1" />
                 <MenuItem mnemonicParsing="false" text="Action 2" />
@@ -29,12 +29,12 @@
                   <Insets bottom="5.0" left="5.0" top="5.0" />
                </HBox.margin>
             </MenuButton>
-            <MFXTextField prefHeight="115.0" prefWidth="482.0">
+            <MFXTextField fx:id="searchTextField" prefHeight="115.0" prefWidth="482.0">
                <HBox.margin>
                   <Insets bottom="5.0" left="5.0" top="5.0" />
                </HBox.margin>
             </MFXTextField>
-            <MenuButton mnemonicParsing="false" prefHeight="104.0" prefWidth="331.0" text="MenuButton">
+            <MenuButton fx:id="menuBtn" mnemonicParsing="false" prefHeight="104.0" prefWidth="331.0" text="MenuButton">
               <items>
                 <MenuItem mnemonicParsing="false" text="Action 1" />
                 <MenuItem mnemonicParsing="false" text="Action 2" />
@@ -45,7 +45,7 @@
             </MenuButton>
             <ButtonBar prefHeight="40.0" prefWidth="200.0">
                <buttons>
-                  <MFXButton depthLevel="LEVEL1" prefHeight="42.0" prefWidth="104.0" text="-">
+                  <MFXButton fx:id="minimizeBtn" depthLevel="LEVEL1" prefHeight="42.0" prefWidth="104.0" text="-">
                      <padding>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </padding>
@@ -53,7 +53,7 @@
                         <Font size="22.0" />
                      </font>
                   </MFXButton>
-                  <MFXButton depthLevel="LEVEL1" prefHeight="42.0" prefWidth="104.0" text="◻">
+                  <MFXButton fx:id="maximizeBtn" depthLevel="LEVEL1" prefHeight="42.0" prefWidth="104.0" text="◻">
                      <padding>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </padding>
@@ -61,7 +61,7 @@
                         <Font size="22.0" />
                      </font>
                   </MFXButton>
-                  <MFXButton depthLevel="LEVEL1" prefHeight="42.0" prefWidth="104.0" text="X">
+                  <MFXButton fx:id="closeBtn" depthLevel="LEVEL1" prefHeight="42.0" prefWidth="104.0" text="X">
                      <padding>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </padding>
@@ -77,19 +77,19 @@
    <left>
       <VBox prefHeight="635.0" prefWidth="194.0" BorderPane.alignment="CENTER">
          <children>
-            <ListView prefHeight="637.0" prefWidth="194.0">
+            <ListView fx:id="listView" prefHeight="637.0" prefWidth="194.0">
                <padding>
                   <Insets bottom="5.0" />
                </padding>
             </ListView>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <MFXButton prefHeight="49.0" prefWidth="145.0">
+                  <MFXButton fx:id="previousBtn" prefHeight="49.0" prefWidth="145.0" text="Button">
                      <HBox.margin>
                         <Insets right="5.0" top="5.0" />
                      </HBox.margin>
                   </MFXButton>
-                  <MFXButton prefHeight="49.0" prefWidth="145.0">
+                  <MFXButton fx:id="nextBtn" prefHeight="49.0" prefWidth="145.0">
                      <padding>
                         <Insets top="5.0" />
                      </padding>
@@ -106,6 +106,6 @@
       </VBox>
    </left>
    <center>
-      <ImageView fitHeight="649.0" fitWidth="1003.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
+      <ImageView fx:id="imageView" fitHeight="649.0" fitWidth="1003.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
    </center>
 </BorderPane>

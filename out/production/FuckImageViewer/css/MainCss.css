@@ -25,3 +25,19 @@
 .mfx-button:hover {
     -fx-background-color: #388E3C; /* Darker green color on hover */
 }
+
+#borderPane {
+    -fx-background-color: #236b6b;
+}
+
+#listView {
+    -fx-background-color: #ceb8b8;
+}
+
+#searchTextField {
+    -fx-background-color: #ceb8b8;
+}
+
+#imageView {
+    -fx-background-color: #ceb8b8;
+}
