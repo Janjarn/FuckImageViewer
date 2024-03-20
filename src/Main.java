@@ -1,3 +1,4 @@
+import imageviewer.gui.controller.ImageViewController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,8 +18,9 @@ public class Main extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/ImageView.fxml"));
         Parent root = loader.load();
         primaryStage.setScene(new Scene(root));
+        ImageViewController imageViewController = loader.getController();
+        imageViewController.setup();
         primaryStage.setTitle("Image Viewer");
-        primaryStage.setMaximized(true);
         primaryStage.show();
     }
 }
