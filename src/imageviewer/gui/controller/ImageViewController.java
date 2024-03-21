@@ -4,6 +4,7 @@ import io.github.palexdev.materialfx.controls.MFXListView;
 import io.github.palexdev.materialfx.controls.MFXScrollPane;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
@@ -12,8 +13,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
 import java.io.File;
+import java.sql.Time;
+import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class ImageViewController {
 
@@ -67,19 +72,39 @@ public class ImageViewController {
         return false;
     }
     @FXML
-    private void handleSelectedImage(MouseEvent mouseEvent) {
-        List<String> listOfImagesSelected = new ArrayList<>();
+    private void handleSelectedImage(MouseEvent mouseEvent) throws InterruptedException {
 
         String imageName = MFXlistViewImages.getSelectionModel().getSelection().toString();
-        listOfImagesSelected.add(imageName);
-        for (String sr : listOfImagesSelected){
-            System.out.println(sr);
+
+        for (String image : trimImages(imageName)) {
+            showImage(image);
         }
+        //showImage(trimImages(imageName));
+    }
 
+    private List<String> trimImages(String stringToBeTrimmed){
+        List<String> firstTrimmingofImages = new ArrayList<>();
+        List<String> secondTrimmingofImages = new ArrayList<>();
+        List<String> finalListofImages = new ArrayList<>();
 
-        //String imageName = (String) listViewImages.getSelectionModel().getSelectedItem();
-
-        showImage(imageName);
+        firstTrimmingofImages.addAll(List.of(stringToBeTrimmed.split(",")));
+        for (String sr : firstTrimmingofImages){
+            String[] parts = sr.split("=");
+            if (parts.length > 1) {
+                secondTrimmingofImages.add(parts[1]);
+            } else {
+                secondTrimmingofImages.add(sr);
+            }
+        }
+        for (String sr : secondTrimmingofImages){
+            String[] parts = sr.split("}");
+            if (parts.length > 0) {
+                finalListofImages.add(parts[0]);
+            } else {
+                finalListofImages.add(sr);
+            }
+        }
+        return finalListofImages;
     }
 
     private void showImage(String imageName) {
@@ -88,6 +113,17 @@ public class ImageViewController {
             Image image = new Image(new File(imagePath).toURI().toString());
             imageViewShowImage.setImage(image);
         }
+    }
+    @FXML
+    private void handlePreviousImage(ActionEvent actionEvent) {
+    }
+
+    @FXML
+    private void handleNextImage(ActionEvent actionEvent) {
+        ObservableList allimages = MFXlistViewImages.getItems();
+
+
+
     }
 }
 
