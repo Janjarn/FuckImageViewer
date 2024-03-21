@@ -22,9 +22,11 @@ public class ImageViewController {
     @FXML
     private ListView listViewImages;
 
+    @FXML
+    private MFXListView MFXlistViewImages;
+
     public void setup() {
-        String folderPath = "resources/images";
-        List<File> imageList = listImages(folderPath);
+        List<File> imageList = listImages("resources/images");
 
         List<String> imageNames = new ArrayList<>();
         for (File imageFile : imageList) {
@@ -32,7 +34,7 @@ public class ImageViewController {
         }
 
         ObservableList<String> observableImageNames = FXCollections.observableArrayList(imageNames);
-        listViewImages.setItems(observableImageNames);
+        MFXlistViewImages.setItems(observableImageNames);
     }
 
     public static List<File> listImages(String folderPath) {
@@ -66,9 +68,21 @@ public class ImageViewController {
     }
     @FXML
     private void handleSelectedImage(MouseEvent mouseEvent) {
+        List<String> listOfImagesSelected = new ArrayList<>();
 
-        String imageName = (String) listViewImages.getSelectionModel().getSelectedItem();
+        String imageName = MFXlistViewImages.getSelectionModel().getSelection().toString();
+        listOfImagesSelected.add(imageName);
+        for (String sr : listOfImagesSelected){
+            System.out.println(sr);
+        }
 
+
+        //String imageName = (String) listViewImages.getSelectionModel().getSelectedItem();
+
+        showImage(imageName);
+    }
+
+    private void showImage(String imageName) {
         if (imageName != null) {
             String imagePath = "resources/images/" + imageName;
             Image image = new Image(new File(imagePath).toURI().toString());
