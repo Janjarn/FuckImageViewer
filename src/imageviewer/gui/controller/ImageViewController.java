@@ -73,7 +73,7 @@ public class ImageViewController {
 
     // Method to check if a file is an image file based on its extension
     private static boolean isImageFile(String fileName) {
-        String[] imageExtensions = {".jpg"};
+        String[] imageExtensions = {".jpg" , ".gif"};
         for (String extension : imageExtensions) {
             if (fileName.toLowerCase().endsWith(extension)) {
                 return true;
@@ -100,7 +100,7 @@ public class ImageViewController {
 
         // Timer for scheduling image display with a delay
         slideshowTimer = new Timer(); // Create a new timer for the slideshow
-        int delay = 2000; // Delay between each image display (in milliseconds)
+        int delay = 2500; // Delay between each image display (in milliseconds)
 
         // Schedule each image to be shown after a delay
         for (int i = 0; i < images.size(); i++) {
