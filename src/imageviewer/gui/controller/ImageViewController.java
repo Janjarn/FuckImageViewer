@@ -28,6 +28,10 @@ public class ImageViewController {
     @FXML
     private MFXListView MFXlistViewImages;
 
+    private String savedStringOfImage = null;
+    private int nextIndex = 0;
+    private Timer slideshowTimer;
+
     // Setup method to initialize the view
     public void setup() {
         // Get list of image files from resources/images folder
@@ -81,22 +85,32 @@ public class ImageViewController {
     // Event handler for selecting an image from the MaterialFX ListView
     @FXML
     private void handleSelectedImage(MouseEvent mouseEvent) throws InterruptedException {
+        // Check if there's an ongoing slideshow and cancel it before starting a new one
+        if (slideshowTimer != null) {
+            slideshowTimer.cancel(); // Cancels the ongoing slideshow
+            slideshowTimer = null;   // Resets the timer reference
+        }
+
+        // Get the selected image name from the list view
         String imageName = MFXlistViewImages.getSelectionModel().getSelection().toString();
+        savedStringOfImage = imageName; // Save the selected image name
+
+        // Trim the selected image name to get a list of individual image names
         List<String> images = trimImages(imageName);
 
         // Timer for scheduling image display with a delay
-        Timer timer = new Timer();
-        int delay = 2000; // 2 seconds delay
+        slideshowTimer = new Timer(); // Create a new timer for the slideshow
+        int delay = 2000; // Delay between each image display (in milliseconds)
 
         // Schedule each image to be shown after a delay
         for (int i = 0; i < images.size(); i++) {
-            final int index = i;
-            timer.schedule(new TimerTask() {
+            final int index = i; // Create a final variable to hold the current index
+            slideshowTimer.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    showImage(images.get(index));
+                    showImage(images.get(index)); // Display the image at the current index
                 }
-            }, i * delay);
+            }, i * delay); // Schedule the task with a delay proportional to the index
         }
     }
 
@@ -137,101 +151,145 @@ public class ImageViewController {
         }
     }
 
+    // Method to extract the index of the image selected from a list of images displayed in buttons
+    private int trimImageForButtons(String image) {
+        List<String> currentIndex1; // List to store the intermediate result of splitting the image string
+        List<String> currentIndex2 = new ArrayList<>(); // List to store the result of the first split
+        List<String> currentIndex3 = new ArrayList<>(); // List to store the result of the second split
+
+        // Get the selected image as a string and put it into a list
+        currentIndex1 = Collections.singletonList(image);
+
+        // Iterate through currentIndex1
+        for (String sr : currentIndex1) {
+            // Split the string by "=" and add the first part to currentIndex2
+            String[] parts = sr.split("=");
+            if (parts.length > 0) {
+                currentIndex2.add(parts[0]); // Add the first part before "=" to currentIndex2
+            } else {
+                currentIndex2.add(sr); // If no "=", add the whole string to currentIndex2
+            }
+        }
+
+        // Iterate through currentIndex2
+        for (String sr : currentIndex2) {
+            // Split the string by "{" and add the second part to currentIndex3
+            String[] parts = sr.split("\\{");
+            if (parts.length > 1) {
+                currentIndex3.add(parts[1]); // Add the second part after "{" to currentIndex3
+            } else {
+                currentIndex3.add(sr); // If no "{", add the whole string to currentIndex3
+            }
+        }
+
+        // Parse the first element of currentIndex3 as an integer (the index of the image) and return it
+        int finalIndex = Integer.parseInt(currentIndex3.get(0));
+        return finalIndex; // Return the index of the image
+    }
+
     // Event handler for navigating to the previous image
     @FXML
     private void handlePreviousImage(ActionEvent actionEvent) {
-    }
+        // Retrieve the string representation of the currently selected image
+        String selectedImageString = MFXlistViewImages.getItems().get(nextIndex).toString();
 
-    // Event handler for navigating to the next image
-
-    private String savedStringOfImage = null;
-    private List<String> currentIndex3 = new ArrayList<>();
-    private int nextIndex = 0;
-    @FXML
-    private void handleNextImage(ActionEvent actionEvent) {
+        // Check if there's no previously saved image
         if (savedStringOfImage == null) {
-            String imageName = (String) MFXlistViewImages.getItems().getFirst();
-            savedStringOfImage = imageName;
-            // Show the next image
+            // Retrieve the name of the last image in the list
+            String imageName = (String) MFXlistViewImages.getItems().get(MFXlistViewImages.getItems().size() - 1);
+            savedStringOfImage = imageName; // Save the name of the image
+            nextIndex = MFXlistViewImages.getItems().size() - 1; // Set the next index to the last image index
+
+            // Display the last image
             for (String image : trimImages(imageName)) {
                 showImage(image);
             }
         }
-        // Variable to hold the selected image string
-        String selectedImageString = new String();
-        savedStringOfImage = MFXlistViewImages.getSelectionModel().getSelection().toString();
-
-        // Temporary variable to store the saved image string
-        String imageTemp = savedStringOfImage;
-
-        // Check if the saved image string is not null
-        if (savedStringOfImage != null) {
-            // Iterate through trimmed images
-            for (String image : trimImages(imageTemp)) {
-                selectedImageString = image;
-            }
-        }
-
         // Check if the saved image string is equal to the selected image string
-        if (savedStringOfImage == selectedImageString) {
-            // Check if the next index exceeds the size of the image list
-            if (nextIndex >= MFXlistViewImages.getItems().size()) {
-                nextIndex = 0; // Reset next index to 0
-            } else {
-                // Get the name of the next image
-                String imageName = MFXlistViewImages.getItems().get(nextIndex + 1).toString();
-                nextIndex++; // Increment next index
+        else if (savedStringOfImage.equals(selectedImageString)) {
+            // Decrement the next index to navigate to the previous image
+            nextIndex--;
 
-                // Show the next image
+            // If the index goes below zero, loop back to the last image
+            if (nextIndex == -1) {
+                nextIndex = MFXlistViewImages.getItems().size() - 1; // Reset next index to the last image index
+            }
+
+            // Check if the next index is within the bounds of the image list
+            if (nextIndex <= MFXlistViewImages.getItems().size()) {
+                // Get the name of the previous image
+                String imageName = MFXlistViewImages.getItems().get(nextIndex).toString();
+                savedStringOfImage = imageName; // Save the name of the image
+
+                // Display the previous image
                 for (String image : trimImages(imageName)) {
                     showImage(image);
                 }
             }
         }
-
         // If the saved image string is not equal to the selected image string
-        if (savedStringOfImage != selectedImageString) {
-            nextIndex = 0; // Reset next index to 0
-
-            // Lists to hold current index data
-            List<String> currentIndex1;
-            List<String> currentIndex2 = new ArrayList<>();
-
-            // Get the selected image as a string
-            String selectedImage = MFXlistViewImages.getSelectionModel().getSelection().toString();
-            currentIndex1 = Collections.singletonList(selectedImage);
-
-            // Iterate through currentIndex1
-            for (String sr : currentIndex1) {
-                // Split the string by "=" and add to currentIndex2
-                String[] parts = sr.split("=");
-                if (parts.length > 0) {
-                    currentIndex2.add(parts[0]);
-                } else {
-                    currentIndex2.add(sr);
-                }
-            }
-
-            // Iterate through currentIndex2
-            for (String sr : currentIndex2) {
-                // Split the string by "{" and add to currentIndex3
-                String[] parts = sr.split("\\{");
-                if (parts.length > 1) {
-                    currentIndex3.add(parts[1]);
-                } else {
-                    currentIndex3.add(sr);
-                }
-            }
-
-            // Get the next index and increment it
-            nextIndex = Integer.parseInt(currentIndex3.getLast()) + 1;
-
-            // Get the name of the next image
+        else if (!savedStringOfImage.equals(selectedImageString)) {
+            // Calculate the index of the previous image based on the saved image string
+            nextIndex = trimImageForButtons(savedStringOfImage) - 1;
             String imageName = MFXlistViewImages.getItems().get(nextIndex).toString();
 
-            // Show the next image
+            // Display the previous image
             for (String image : trimImages(imageName)) {
-                savedStringOfImage = image;
+                savedStringOfImage = image; // Save the name of the image
+                showImage(image);
+            }
+        }
+    }
+
+
+    // Event handler for navigating to the next image
+    @FXML
+    private void handleNextImage(ActionEvent actionEvent) {
+        // Variable to hold the selected image string
+        String selectedImageString = MFXlistViewImages.getItems().get(nextIndex).toString();
+
+        // Check if there's no previously saved image
+        if (savedStringOfImage == null) {
+            // Retrieve the name of the first image in the list
+            String imageName = (String) MFXlistViewImages.getItems().get(0);
+            savedStringOfImage = imageName; // Save the name of the image
+
+            // Display the first image
+            for (String image : trimImages(imageName)) {
+                showImage(image);
+            }
+        }
+        // Check if the saved image string is equal to the selected image string
+        else if (savedStringOfImage.equals(selectedImageString)) {
+            // Increment the next index to navigate to the next image
+            nextIndex++;
+
+            // If the index exceeds the size of the image list, loop back to the first image
+            if (nextIndex >= MFXlistViewImages.getItems().size()) {
+                nextIndex = 0; // Reset next index to 0
+            }
+
+            // Check if the next index is within the bounds of the image list
+            if (nextIndex <= MFXlistViewImages.getItems().size()) {
+                // Get the name of the next image
+                String imageName = MFXlistViewImages.getItems().get(nextIndex).toString();
+                savedStringOfImage = imageName; // Save the name of the image
+
+                // Display the next image
+                for (String image : trimImages(imageName)) {
+                    showImage(image);
+                }
+            }
+        }
+        // If the saved image string is not equal to the selected image string
+        else if (!savedStringOfImage.equals(selectedImageString)) {
+            // Calculate the index of the next image based on the saved image string
+            nextIndex = trimImageForButtons(savedStringOfImage) + 1;
+            String imageName = MFXlistViewImages.getItems().get(nextIndex).toString();
+
+            // Display the next image
+            for (String image : trimImages(imageName)) {
+                savedStringOfImage = image; // Save the name of the image
                 showImage(image);
             }
         }
