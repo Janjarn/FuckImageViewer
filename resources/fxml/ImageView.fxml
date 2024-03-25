@@ -5,79 +5,100 @@
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="735.0" prefWidth="1216.0" stylesheets="@../css/MainCss.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="imageviewer.gui.controller.ImageViewController">
    <top>
-      <HBox prefHeight="60.0" prefWidth="3481.0" BorderPane.alignment="TOP_CENTER">
+      <GridPane prefHeight="74.0" prefWidth="1216.0" BorderPane.alignment="TOP_CENTER">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
          <children>
-            <MenuButton mnemonicParsing="false" prefHeight="63.0" prefWidth="107.0" text="☰">
-              <items>
-                <MenuItem mnemonicParsing="false" text="Action 1" />
-                <MenuItem mnemonicParsing="false" text="Action 2" />
-              </items>
-               <font>
-                  <Font size="29.0" />
-               </font>
-               <HBox.margin>
-                  <Insets bottom="5.0" left="5.0" top="5.0" />
-               </HBox.margin>
-            </MenuButton>
-            <MFXTextField prefHeight="115.0" prefWidth="482.0">
-               <HBox.margin>
-                  <Insets bottom="5.0" left="5.0" top="5.0" />
-               </HBox.margin>
-            </MFXTextField>
-            <MenuButton mnemonicParsing="false" prefHeight="104.0" prefWidth="331.0" text="MenuButton">
-              <items>
-                <MenuItem mnemonicParsing="false" text="Action 1" />
-                <MenuItem mnemonicParsing="false" text="Action 2" />
-              </items>
-               <HBox.margin>
-                  <Insets bottom="5.0" left="10.0" top="5.0" />
-               </HBox.margin>
-            </MenuButton>
-            <ButtonBar prefHeight="40.0" prefWidth="200.0">
-               <buttons>
-                  <MFXButton depthLevel="LEVEL1" prefHeight="42.0" prefWidth="104.0" text="-">
-                     <padding>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </padding>
+            <HBox prefHeight="60.0" prefWidth="3481.0">
+               <children>
+                  <MenuButton mnemonicParsing="false" prefHeight="63.0" prefWidth="107.0" text="☰">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Action 1" />
+                      <MenuItem mnemonicParsing="false" text="Action 2" />
+                    </items>
                      <font>
-                        <Font size="22.0" />
+                        <Font size="29.0" />
                      </font>
-                  </MFXButton>
-                  <MFXButton depthLevel="LEVEL1" prefHeight="42.0" prefWidth="104.0" text="◻">
-                     <padding>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </padding>
-                     <font>
-                        <Font size="22.0" />
-                     </font>
-                  </MFXButton>
-                  <MFXButton depthLevel="LEVEL1" prefHeight="42.0" prefWidth="104.0" text="X">
-                     <padding>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </padding>
-                     <font>
-                        <Font size="22.0" />
-                     </font>
-                  </MFXButton>
-               </buttons>
-            </ButtonBar>
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" top="5.0" />
+                     </HBox.margin>
+                  </MenuButton>
+                  <MFXTextField prefHeight="115.0" prefWidth="482.0">
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" top="5.0" />
+                     </HBox.margin>
+                  </MFXTextField>
+                  <MenuButton mnemonicParsing="false" prefHeight="104.0" prefWidth="331.0" text="MenuButton">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Action 1" />
+                      <MenuItem mnemonicParsing="false" text="Action 2" />
+                    </items>
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="10.0" top="5.0" />
+                     </HBox.margin>
+                  </MenuButton>
+                  <ButtonBar prefHeight="40.0" prefWidth="200.0">
+                     <buttons>
+                        <MFXButton depthLevel="LEVEL1" prefHeight="42.0" prefWidth="104.0" text="-">
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </MFXButton>
+                        <MFXButton depthLevel="LEVEL1" prefHeight="42.0" prefWidth="104.0" text="◻">
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </MFXButton>
+                        <MFXButton depthLevel="LEVEL1" prefHeight="42.0" prefWidth="104.0" text="X">
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </MFXButton>
+                     </buttons>
+                  </ButtonBar>
+               </children>
+            </HBox>
+            <Label fx:id="lblImageName" alignment="TOP_CENTER" prefHeight="17.0" prefWidth="1225.0" text="Picture Name" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets left="200.0" />
+               </GridPane.margin>
+            </Label>
          </children>
-      </HBox>
+      </GridPane>
    </top>
    <left>
-      <VBox BorderPane.alignment="CENTER">
+      <VBox prefHeight="670.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <MFXListView fx:id="MFXlistViewImages" onMouseClicked="#handleSelectedImage" prefHeight="638.0" prefWidth="200.0" />
+            <Label alignment="TOP_CENTER" prefHeight="17.0" prefWidth="200.0" text="Drag Files here" textAlignment="CENTER" />
+            <MFXListView fx:id="MFXlistViewImages" onDragDropped="#handleOnDragDropped" onDragOver="#handleOnDragOver" onMouseClicked="#handleSelectedImage" prefHeight="638.0" prefWidth="200.0" />
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
                   <MFXButton onAction="#handlePreviousImage" prefHeight="49.0" prefWidth="145.0" text="Previous">
@@ -102,6 +123,6 @@
       </VBox>
    </left>
    <center>
-      <ImageView fx:id="imageViewShowImage" fitHeight="649.0" fitWidth="1003.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
+      <ImageView fx:id="imageViewShowImage" fitHeight="649.0" fitWidth="1003.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
    </center>
 </BorderPane>
