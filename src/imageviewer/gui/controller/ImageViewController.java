@@ -170,7 +170,51 @@ public class ImageViewController {
 
     // Method to display the selected image
     private void showImage(String imageName) {
+        if (imageName != null) {
+            String imagePath = "resources/images/" + imageName;
+            Image image = new Image(new File(imagePath).toURI().toString());
+            updateUI(() -> imageViewShowImage.setImage(image));
 
+            int redPixels = 0;
+            int greenPixels = 0;
+            int bluePixels = 0;
+
+            // Get pixel reader for the image
+            PixelReader pixelReader = image.getPixelReader();
+
+            // Iterate over each pixel in the image
+            int width = (int) image.getWidth();
+            int height = (int) image.getHeight();
+            for (int y = 0; y < height; y++) {
+                for (int x = 0; x < width; x++) {
+                    // Get color of the pixel at coordinates (x, y)
+                    Color color = pixelReader.getColor(x, y);
+
+                    // Extract RGB components of the color
+                    double red = color.getRed();
+                    double green = color.getGreen();
+                    double blue = color.getBlue();
+
+                    // Check if the pixel is predominantly red, green, or blue
+                    if (red > green && red > blue) {
+                        redPixels++;
+                    } else if (green > red && green > blue) {
+                        greenPixels++;
+                    } else if (blue > red && blue > green) {
+                        bluePixels++;
+                    }
+                }
+            }
+
+            int finalRedPixels = redPixels;
+            int finalGreenPixels = greenPixels;
+            int finalBluePixels = bluePixels;
+            updateUI(() -> {
+                lblRedPixels.setText("Red Pixels: " + finalRedPixels);
+                lblGreenPixels.setText("Green Pixels: " + finalGreenPixels);
+                lblBluePixels.setText("Blue Pixels: " + finalBluePixels);
+            });
+        }
     }
     private void updateUI(Runnable runnable) {
         synchronized (lock) {
