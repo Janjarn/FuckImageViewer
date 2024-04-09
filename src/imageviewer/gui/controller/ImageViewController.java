@@ -10,10 +10,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.PixelReader;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
+import javafx.scene.paint.Color;
 
 import java.io.File;
 import java.io.IOException;
@@ -159,6 +161,41 @@ public class ImageViewController {
             String imagePath = "resources/images/" + imageName;
             Image image = new Image(new File(imagePath).toURI().toString());
             imageViewShowImage.setImage(image);
+            int redPixels = 0;
+            int greenPixels = 0;
+            int bluePixels = 0;
+
+            // Get pixel reader for the image
+            PixelReader pixelReader = image.getPixelReader();
+
+            // Iterate over each pixel in the image
+            int width = (int) image.getWidth();
+            int height = (int) image.getHeight();
+            for (int y = 0; y < height; y++) {
+                for (int x = 0; x < width; x++) {
+                    // Get color of the pixel at coordinates (x, y)
+                    Color color = pixelReader.getColor(x, y);
+
+                    // Extract RGB components of the color
+                    double red = color.getRed();
+                    double green = color.getGreen();
+                    double blue = color.getBlue();
+
+                    // Check if the pixel is predominantly red, green, or blue
+                    if (red > green && red > blue) {
+                        redPixels++;
+                    } else if (green > red && green > blue) {
+                        greenPixels++;
+                    } else if (blue > red && blue > green) {
+                        bluePixels++;
+                    }
+                }
+            }
+
+            // Print the count of red, green, and blue pixels
+            System.out.println("Red Pixels: " + redPixels);
+            System.out.println("Green Pixels: " + greenPixels);
+            System.out.println("Blue Pixels: " + bluePixels);
         }
     }
 
