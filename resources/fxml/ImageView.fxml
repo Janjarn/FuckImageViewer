@@ -58,30 +58,9 @@
                   </MenuButton>
                   <ButtonBar prefHeight="40.0" prefWidth="200.0">
                      <buttons>
-                        <MFXButton depthLevel="LEVEL1" prefHeight="42.0" prefWidth="104.0" text="-">
-                           <padding>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                           </padding>
-                           <font>
-                              <Font size="22.0" />
-                           </font>
-                        </MFXButton>
-                        <MFXButton depthLevel="LEVEL1" prefHeight="42.0" prefWidth="104.0" text="◻">
-                           <padding>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                           </padding>
-                           <font>
-                              <Font size="22.0" />
-                           </font>
-                        </MFXButton>
-                        <MFXButton depthLevel="LEVEL1" prefHeight="42.0" prefWidth="104.0" text="X">
-                           <padding>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                           </padding>
-                           <font>
-                              <Font size="22.0" />
-                           </font>
-                        </MFXButton>
+                        <Label fx:id="lblRedPixels" text="Red Pixels" />
+                        <Label fx:id="lblBluePixels" text="Blue Pixels" />
+                        <Label fx:id="lblGreenPixels" text="Green Pixels" />
                      </buttons>
                   </ButtonBar>
                </children>

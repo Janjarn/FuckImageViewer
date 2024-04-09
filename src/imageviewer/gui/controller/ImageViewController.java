@@ -26,7 +26,14 @@ import java.util.*;
 
 public class ImageViewController {
 
-    public Label lblImageName;
+    @FXML
+    private Label lblImageName;
+    @FXML
+    private Label lblRedPixels;
+    @FXML
+    private Label lblBluePixels;
+    @FXML
+    private Label lblGreenPixels;
     @FXML
     private ImageView imageViewShowImage;
 
