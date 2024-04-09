@@ -1,0 +1,43 @@
+/* DarkMainCss.css */
+
+/* Apply styles to the MenuButton */
+.menu-button {
+    -fx-background-color: #224723; /* Green background color */
+    -fx-text-fill: white; /* White text color */
+    -fx-font-size: 16px; /* Font size */
+}
+
+.menu-button:hover {
+    -fx-background-color: #224723; /* Darker green color on hover */
+}
+
+.text-field:focused {
+    -fx-border-color: #224723; /* Darker green border color when focused */
+}
+
+/* Apply styles to the MFXButton */
+.mfx-button {
+    -fx-background-color: #073b09; /* Green background color */
+    -fx-text-fill: white; /* White text color */
+    -fx-font-size: 16px; /* Font size */
+}
+
+.mfx-button:hover {
+    -fx-background-color: #031A06FF; /* Darker green color on hover */
+}
+
+#borderPane {
+    -fx-background-color: #236b6b;
+}
+
+#listView {
+    -fx-background-color: #4f2d2d;
+}
+
+#searchTextField {
+    -fx-background-color: #4f2d2d;
+}
+
+#imageView {
+    -fx-background-color: #4f2d2d;
+}

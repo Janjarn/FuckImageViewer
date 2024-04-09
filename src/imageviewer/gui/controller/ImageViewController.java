@@ -6,6 +6,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
@@ -16,6 +17,7 @@ import javafx.scene.paint.Color;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -168,51 +170,7 @@ public class ImageViewController {
 
     // Method to display the selected image
     private void showImage(String imageName) {
-        if (imageName != null) {
-            String imagePath = "resources/images/" + imageName;
-            Image image = new Image(new File(imagePath).toURI().toString());
-            updateUI(() -> imageViewShowImage.setImage(image));
 
-            int redPixels = 0;
-            int greenPixels = 0;
-            int bluePixels = 0;
-
-            // Get pixel reader for the image
-            PixelReader pixelReader = image.getPixelReader();
-
-            // Iterate over each pixel in the image
-            int width = (int) image.getWidth();
-            int height = (int) image.getHeight();
-            for (int y = 0; y < height; y++) {
-                for (int x = 0; x < width; x++) {
-                    // Get color of the pixel at coordinates (x, y)
-                    Color color = pixelReader.getColor(x, y);
-
-                    // Extract RGB components of the color
-                    double red = color.getRed();
-                    double green = color.getGreen();
-                    double blue = color.getBlue();
-
-                    // Check if the pixel is predominantly red, green, or blue
-                    if (red > green && red > blue) {
-                        redPixels++;
-                    } else if (green > red && green > blue) {
-                        greenPixels++;
-                    } else if (blue > red && blue > green) {
-                        bluePixels++;
-                    }
-                }
-            }
-
-            int finalRedPixels = redPixels;
-            int finalGreenPixels = greenPixels;
-            int finalBluePixels = bluePixels;
-            updateUI(() -> {
-                lblRedPixels.setText("Red Pixels: " + finalRedPixels);
-                lblGreenPixels.setText("Green Pixels: " + finalGreenPixels);
-                lblBluePixels.setText("Blue Pixels: " + finalBluePixels);
-            });
-        }
     }
     private void updateUI(Runnable runnable) {
         synchronized (lock) {
@@ -355,4 +313,34 @@ public class ImageViewController {
             handleNextImage(null);
         }
     }
+    // Method to handle switching to light mode
+    @FXML
+    private void lightMode(ActionEvent actionEvent) {
+        applyStylesheet("/css/LightMainCss.css");
+    }
+
+    // Method to handle switching to dark mode
+    @FXML
+    private void darkMode(ActionEvent actionEvent) {
+        applyStylesheet("/css/DarkMainCss.css");
+    }
+
+    // Method to apply a stylesheet to the scene
+    private void applyStylesheet(String cssPath) {
+        Scene scene = imageViewShowImage.getScene();
+
+        if (scene != null) {
+            scene.getStylesheets().clear();
+            String css = getClass().getResource(cssPath).toExternalForm();
+            scene.getStylesheets().add(css);
+
+            // Print out the list of currently applied stylesheets for debugging
+            System.out.println("Applied Stylesheets:");
+            scene.getStylesheets().forEach(System.out::println);
+        } else {
+            System.err.println("Scene is null, unable to apply stylesheet.");
+        }
+    }
+
+
 }
