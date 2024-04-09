@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="735.0" prefWidth="1216.0" stylesheets="@../css/LightMainCss.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="imageviewer.gui.controller.ImageViewController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="735.0" prefWidth="1216.0" stylesheets="@../css/LightMainCss.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="imageviewer.gui.controller.ImageViewController">
    <top>
       <GridPane prefHeight="74.0" prefWidth="1216.0" BorderPane.alignment="TOP_CENTER">
          <columnConstraints>
@@ -47,7 +47,7 @@
                         <Insets bottom="5.0" left="5.0" top="5.0" />
                      </HBox.margin>
                   </MFXTextField>
-                  <MenuButton mnemonicParsing="false" prefHeight="104.0" prefWidth="331.0" text="MenuButton">
+                  <MenuButton mnemonicParsing="false" prefHeight="49.0" prefWidth="210.0" text="MenuButton">
                      <items>
                         <MenuItem mnemonicParsing="false" text="Action 1" />
                         <MenuItem mnemonicParsing="false" text="Action 2" />
@@ -56,9 +56,9 @@
                         <Insets bottom="5.0" left="10.0" top="5.0" />
                      </HBox.margin>
                   </MenuButton>
-                  <ButtonBar prefHeight="40.0" prefWidth="200.0">
+                  <ButtonBar nodeOrientation="LEFT_TO_RIGHT" prefHeight="59.0" prefWidth="400.0">
                      <buttons>
-                        <Label fx:id="lblRedPixels" text="Red Pixels" />
+                        <Label fx:id="lblRedPixels" prefHeight="17.0" prefWidth="178.0" text="Red Pixels" />
                         <Label fx:id="lblBluePixels" text="Blue Pixels" />
                         <Label fx:id="lblGreenPixels" maxWidth="1.7976931348623157E308" text="Green Pixels" />
                      </buttons>
