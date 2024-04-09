@@ -200,9 +200,9 @@ public class ImageViewController {
             }
 
             // Print the count of red, green, and blue pixels
-            System.out.println("Red Pixels: " + redPixels);
-            System.out.println("Green Pixels: " + greenPixels);
-            System.out.println("Blue Pixels: " + bluePixels);
+            lblRedPixels.setText("Red Pixels: " + redPixels);
+            lblGreenPixels.setText("Green Pixels: " + greenPixels);
+            lblBluePixels.setText("Blue Pixels: " + bluePixels);
         }
     }
 
