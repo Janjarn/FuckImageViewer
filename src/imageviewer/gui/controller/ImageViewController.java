@@ -11,10 +11,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelReader;
-import javafx.scene.input.DragEvent;
-import javafx.scene.input.Dragboard;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.input.TransferMode;
+import javafx.scene.input.*;
 import javafx.scene.paint.Color;
 
 import java.io.File;
@@ -43,6 +40,7 @@ public class ImageViewController {
     private String savedStringOfImage = null;
     private int nextIndex = 0;
     private Timer slideshowTimer;
+    private final Object lock = new Object();
 
     // Setup method to initialize the view
     public void setup() {
@@ -54,6 +52,12 @@ public class ImageViewController {
         for (File imageFile : imageList) {
             imageNames.add(imageFile.getName());
         }
+        Platform.runLater(() -> {
+                    imageViewShowImage.setImage(null);
+                    lblRedPixels.setText("Red Pixels: 0");
+                    lblGreenPixels.setText("Green Pixels: 0");
+                    lblBluePixels.setText("Blue Pixels: 0");
+                });
 
         // Populate the MaterialFX ListView with image names
         ObservableList<String> observableImageNames = FXCollections.observableArrayList(imageNames);
@@ -167,7 +171,8 @@ public class ImageViewController {
         if (imageName != null) {
             String imagePath = "resources/images/" + imageName;
             Image image = new Image(new File(imagePath).toURI().toString());
-            imageViewShowImage.setImage(image);
+            updateUI(() -> imageViewShowImage.setImage(image));
+
             int redPixels = 0;
             int greenPixels = 0;
             int bluePixels = 0;
@@ -199,10 +204,19 @@ public class ImageViewController {
                 }
             }
 
-            // Print the count of red, green, and blue pixels
-            lblRedPixels.setText("Red Pixels: " + redPixels);
-            lblGreenPixels.setText("Green Pixels: " + greenPixels);
-            lblBluePixels.setText("Blue Pixels: " + bluePixels);
+            int finalRedPixels = redPixels;
+            int finalGreenPixels = greenPixels;
+            int finalBluePixels = bluePixels;
+            updateUI(() -> {
+                lblRedPixels.setText("Red Pixels: " + finalRedPixels);
+                lblGreenPixels.setText("Green Pixels: " + finalGreenPixels);
+                lblBluePixels.setText("Blue Pixels: " + finalBluePixels);
+            });
+        }
+    }
+    private void updateUI(Runnable runnable) {
+        synchronized (lock) {
+            Platform.runLater(runnable);
         }
     }
 
@@ -330,5 +344,15 @@ public class ImageViewController {
             dragEvent.acceptTransferModes(TransferMode.COPY_OR_MOVE);
         }
         dragEvent.consume();
+    }
+
+    public void handleArrowKeys(KeyEvent keyEvent) {
+        if (keyEvent.getCode() == KeyCode.LEFT) {
+            // Navigate to previous image when left arrow key is pressed
+            handlePreviousImage(null);
+        } else if (keyEvent.getCode() == KeyCode.RIGHT) {
+            // Navigate to next image when right arrow key is pressed
+            handleNextImage(null);
+        }
     }
 }

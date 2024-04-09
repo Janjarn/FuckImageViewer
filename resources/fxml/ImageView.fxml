@@ -77,7 +77,7 @@
       <VBox prefHeight="670.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
             <Label alignment="TOP_CENTER" prefHeight="17.0" prefWidth="200.0" text="Drag Files here" textAlignment="CENTER" />
-            <MFXListView fx:id="MFXlistViewImages" onDragDropped="#handleOnDragDropped" onDragOver="#handleOnDragOver" onMouseClicked="#handleSelectedImage" prefHeight="638.0" prefWidth="200.0" />
+            <MFXListView fx:id="MFXlistViewImages" onDragDropped="#handleOnDragDropped" onDragOver="#handleOnDragOver" onKeyPressed="#handleArrowKeys" onMouseClicked="#handleSelectedImage" prefHeight="638.0" prefWidth="200.0" />
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
                   <MFXButton onAction="#handlePreviousImage" prefHeight="49.0" prefWidth="145.0" text="Previous">
