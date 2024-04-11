@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="735.0" prefWidth="1216.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="imageviewer.gui.controller.ImageViewController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="735.0" prefWidth="1216.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="imageviewer.gui.controller.ImageViewController">
    <top>
       <GridPane prefHeight="74.0" prefWidth="1216.0" BorderPane.alignment="TOP_CENTER">
          <columnConstraints>
@@ -32,8 +32,8 @@
                <children>
                   <MenuButton mnemonicParsing="false" prefHeight="63.0" prefWidth="107.0" text="☰">
                      <items>
-                        <MenuItem mnemonicParsing="false" text="Light Mode" onAction="#lightMode" />
-                        <MenuItem mnemonicParsing="false" text="Dark Mode" onAction="#darkMode" />
+                        <MenuItem mnemonicParsing="false" onAction="#lightMode" text="Light Mode" />
+                        <MenuItem mnemonicParsing="false" onAction="#darkMode" text="Dark Mode" />
                      </items>
                      <font>
                         <Font size="29.0" />
@@ -77,7 +77,7 @@
       <VBox maxHeight="1.7976931348623157E308" prefHeight="670.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
             <Label alignment="TOP_CENTER" prefHeight="17.0" prefWidth="200.0" text="Drag Files here" textAlignment="CENTER" />
-            <MFXListView fx:id="MFXlistViewImages" maxHeight="1.7976931348623157E308" onDragDropped="#handleOnDragDropped" onDragOver="#handleOnDragOver" onKeyPressed="#handleArrowKeys" onMouseClicked="#handleSelectedImage" prefHeight="638.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+            <MFXListView fx:id="MFXlistViewImages" maxHeight="1.7976931348623157E308" onDragDropped="#handleOnDragDropped" onDragOver="#handleOnDragOver" onKeyPressed="#handleImage" onMouseClicked="#handleSelectedImage" prefHeight="638.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
                   <MFXButton onAction="#handlePreviousImage" prefHeight="49.0" prefWidth="145.0" text="Previous">

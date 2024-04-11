@@ -349,15 +349,7 @@ public class ImageViewController {
         dragEvent.consume();
     }
 
-    public void handleArrowKeys(KeyEvent keyEvent) {
-        if (keyEvent.getCode() == KeyCode.LEFT) {
-            // Navigate to previous image when left arrow key is pressed
-            handlePreviousImage(null);
-        } else if (keyEvent.getCode() == KeyCode.RIGHT) {
-            // Navigate to next image when right arrow key is pressed
-            handleNextImage(null);
-        }
-    }
+
     // Method to handle switching to light mode
     @FXML
     private void lightMode(ActionEvent actionEvent) {
@@ -389,5 +381,11 @@ public class ImageViewController {
 
     }
 
-
+    public void handleImage(KeyEvent keyEvent) {
+        if (keyEvent.getCode() == KeyCode.RIGHT) {
+            handleNextImage(null);
+        } else if (keyEvent.getCode() == KeyCode.LEFT) {
+            handlePreviousImage(null);
+        }
+    }
 }
