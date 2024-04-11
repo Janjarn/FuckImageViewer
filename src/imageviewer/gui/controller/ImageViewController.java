@@ -59,6 +59,7 @@ public class ImageViewController {
                     lblRedPixels.setText("Red Pixels: 0");
                     lblGreenPixels.setText("Green Pixels: 0");
                     lblBluePixels.setText("Blue Pixels: 0");
+                    lightMode(null); // Call lightMode method to set light mode as default
                 });
 
         // Populate the MaterialFX ListView with image names
@@ -381,9 +382,11 @@ public class ImageViewController {
             // Print out the list of currently applied stylesheets for debugging
             System.out.println("Applied Stylesheets:");
             scene.getStylesheets().forEach(System.out::println);
+            scene.getRoot().requestLayout();
         } else {
             System.err.println("Scene is null, unable to apply stylesheet.");
         }
+
     }
 
 

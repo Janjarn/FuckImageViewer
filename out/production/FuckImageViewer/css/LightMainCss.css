@@ -23,11 +23,11 @@
 }
 
 .mfx-button:hover {
-    -fx-background-color: #388E3C; /* Darker green color on hover */
+    -fx-background-color: #1f4b1c; /* Darker green color on hover */
 }
 
 #borderPane {
-    -fx-background-color: #236b6b;
+    -fx-background-color: #F4B1CFF;
 }
 
 #listView {
